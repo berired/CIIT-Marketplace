@@ -1,16 +1,41 @@
-# React + Vite
+# CIIT Marketplace Readme 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a guide on how to navigate the repository. 
 
-Currently, two official plugins are available:
+## ATTENTION!:
+**Don't push any changes to the main branch**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Branch naming format
+(feature-frontend/backend) name of the feature here
 
-## React Compiler
+Example:
+(feature-frontend)navigation bar
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How are we going to do the work?
 
-## Expanding the ESLint configuration
+Step 1:
+- For the clean React files create branch with the (main) branch as the reference. This will only be done once for the first instance of creating the feature.
+- But incase a clean file is needed, get it from the main branch.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Step 2:
+- For new features, always create a new branch with the latest feature used as the reference branch. **Refer to the branch naming guide**
+
+Example:
+
+Dev 1: Created the navbar feature  
+branch name (feature-frontend)navbar  
+upon completion dev 1 should push the branch and create a pull request.  
+
+Dev 2: Is tasked to create the home page with navbar integration  
+so dev 2 will create a branch using the (feature-frontend)navbar as the branch reference  
+dev 2 will then proceed to code in the branch  
+then upon completion will push the branch and create a pull request too.
+
+Step 3: Document changes well and add well written notes in the code.
+- When pushing a new feature / code edit make sure to document your parts well.
+- Github / Github desktop has a Summary and Description form for that.
+
+# Additional Notes
+- Avoid spaghetti codes, make sure codes are readable and understandable by peers.
+- Create notes for the codes that needs notes.
+- Keep the code consistency. 
