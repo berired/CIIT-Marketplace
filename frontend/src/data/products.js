@@ -8,7 +8,7 @@ const products = [
     category: 'Fashion',
     datePosted: '2 days ago',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=Vintage+Denim+Jacket',
+    image: 'https://placehold.co/700x520?text=Vintage+Denim+Jacket',
     description:
       'A stylish pre-loved vintage denim jacket in good condition. Perfect for casual outfits and campus wear. Minimal signs of use and still very comfortable.',
   },
@@ -21,7 +21,7 @@ const products = [
     category: 'Fashion',
     datePosted: '1 day ago',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=White+Sneakers',
+    image: 'https://placehold.co/700x520?text=White+Sneakers',
     description:
       'Clean white sneakers in good condition. Comfortable for daily use and easy to pair with casual outfits.',
   },
@@ -34,7 +34,7 @@ const products = [
     category: 'Accessories',
     datePosted: '3 days ago',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=Black+Tote+Bag',
+    image: 'https://placehold.co/700x520?text=Black+Tote+Bag',
     description:
       'Simple black tote bag with lots of space for school essentials. Lightly used and still in excellent shape.',
   },
@@ -47,7 +47,7 @@ const products = [
     category: 'Fashion',
     datePosted: '4 days ago',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=Oversized+Hoodie',
+    image: 'https://placehold.co/700x520?text=Oversized+Hoodie',
     description:
       'Comfortable oversized hoodie perfect for chilly classrooms and casual campus outfits.',
   },
@@ -60,7 +60,7 @@ const products = [
     category: 'Gadgets',
     datePosted: 'Today',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=Mechanical+Keyboard',
+    image: 'https://placehold.co/700x520?text=Mechanical+Keyboard',
     description:
       'Mechanical keyboard with responsive switches and clean build quality. Great for typing and gaming.',
   },
@@ -73,7 +73,7 @@ const products = [
     category: 'Gadgets',
     datePosted: '2 days ago',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=Bluetooth+Headphones',
+    image: 'https://placehold.co/700x520?text=Bluetooth+Headphones',
     description:
       'Wireless headphones with solid sound quality and reliable battery life. Ideal for study sessions.',
   },
@@ -86,7 +86,7 @@ const products = [
     category: 'Gadgets',
     datePosted: '5 days ago',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=Drawing+Tablet',
+    image: 'https://placehold.co/700x520?text=Drawing+Tablet',
     description:
       'A reliable drawing tablet for digital art students. Works well for illustration and design projects.',
   },
@@ -99,7 +99,7 @@ const products = [
     category: 'School Supplies',
     datePosted: '1 week ago',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=Backpack',
+    image: 'https://placehold.co/700x520?text=Backpack',
     description:
       'Spacious school backpack with multiple compartments for laptop, notebooks, and daily essentials.',
   },
@@ -112,7 +112,7 @@ const products = [
     category: 'Accessories',
     datePosted: '6 days ago',
     location: 'CIIT Campus',
-    image: 'https://via.placeholder.com/700x520?text=Desk+Lamp',
+    image: 'https://placehold.co/700x520?text=Desk+Lamp',
     description:
       'Compact desk lamp great for study tables and dorm setups. Bright and easy to position.',
   },
