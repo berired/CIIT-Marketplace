@@ -1,6 +1,33 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useAuth } from '../contexts/AuthContext'
+import authService from '../services/authService'
 
 function Login() {
+  const navigate = useNavigate()
+  const { login } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+
+    try {
+      const response = await authService.login(email, password)
+      localStorage.setItem('authToken', response.token)
+      login(response.user)
+      navigate('/')
+    } catch (err) {
+      setError(err.message || 'Login failed. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <section className="auth-page">
       <div className="auth-card">
@@ -12,13 +39,17 @@ function Login() {
             students.
           </p>
 
-          <form className="auth-form">
+          <form className="auth-form" onSubmit={handleLogin}>
+            {error && <div style={{ color: 'red', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</div>}
             <div className="form-group">
               <label htmlFor="login-email">CIIT Email</label>
               <input
                 id="login-email"
                 type="email"
                 placeholder="youremail@ciit.edu.ph"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
 
@@ -28,11 +59,14 @@ function Login() {
                 id="login-password"
                 type="password"
                 placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
 
-            <button className="auth-submit-btn" type="submit">
-              Log In
+            <button className="auth-submit-btn" type="submit" disabled={loading}>
+              {loading ? 'Logging in...' : 'Log In'}
             </button>
           </form>
 

@@ -1,10 +1,48 @@
 import { Link } from 'react-router-dom'
-import products from '../data/products'
+import { useState, useEffect } from 'react'
+import { formatCondition, getImageUrl } from '../utils/formatters'
+import listingService from '../services/listingService'
 
-const filters = ['All', 'Fashion', 'Gadgets', 'School Supplies', 'Accessories']
+const categoryMap = {
+  'All': null,
+  'Electronics': 'electronics',
+  'Clothing': 'clothing',
+  'Books': 'books',
+  'Furniture': 'furniture',
+  'Sports': 'sports',
+  'Toys': 'toys',
+  'Household': 'household',
+  'Other': 'other'
+}
+
+const filters = Object.keys(categoryMap)
 
 function Home() {
-  const featuredProducts = products.slice(0, 8)
+  const [featuredProducts, setFeaturedProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [selectedFilter, setSelectedFilter] = useState('All')
+
+  useEffect(() => {
+    fetchFeaturedListings()
+  }, [])
+
+  const fetchFeaturedListings = async () => {
+    try {
+      setLoading(true)
+      const response = await listingService.getFeaturedListings()
+      setFeaturedProducts(response.listings || [])
+    } catch (err) {
+      console.error('Error fetching listings:', err)
+      setError('Failed to load listings')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const displayProducts = selectedFilter === 'All'
+    ? featuredProducts
+    : featuredProducts.filter(p => p.category === categoryMap[selectedFilter])
 
   return (
     <>
@@ -18,8 +56,9 @@ function Home() {
           {filters.map((filter, index) => (
             <button
               key={filter}
-              className={index === 0 ? 'chip active-chip' : 'chip'}
+              className={selectedFilter === filter ? 'chip active-chip' : 'chip'}
               type="button"
+              onClick={() => setSelectedFilter(filter)}
             >
               {filter}
             </button>
@@ -61,26 +100,34 @@ function Home() {
         </div>
 
         <div className="product-grid">
-          {featuredProducts.map((product) => (
-            <div className="product-card" key={product.id}>
-              <img
-                src={product.image}
-                className="product-image"
-                alt={product.name}
-              />
+          {loading ? (
+            <p>Loading listings...</p>
+          ) : error ? (
+            <p style={{ color: 'red' }}>{error}</p>
+          ) : displayProducts.length > 0 ? (
+            displayProducts.map((product) => (
+              <div className="product-card" key={product.id}>
+                <img
+                  src={getImageUrl(product.image, product.title)}
+                  className="product-image"
+                  alt={product.title}
+                />
 
-              <div className="product-info">
-                <h3>{product.name}</h3>
-                <p className="price">{product.price}</p>
-                <p className="condition">{product.condition}</p>
-                <p className="seller">Seller: {product.seller}</p>
+                <div className="product-info">
+                  <h3>{product.title}</h3>
+                  <p className="price">₱{product.price}</p>
+                  <p className="condition">{formatCondition(product.condition)}</p>
+                  <p className="seller">Seller: {product.seller}</p>
 
-                <Link to={`/product/${product.id}`} className="view-btn-link">
-                  View Details
-                </Link>
+                  <Link to={`/product/${product.id}`} className="view-btn-link">
+                    View Details
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p>No listings found</p>
+          )}
         </div>
       </section>
     </>

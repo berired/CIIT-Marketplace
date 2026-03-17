@@ -1,41 +1,82 @@
-# CIIT Marketplace Readme 
+# CIIT Marketplace
 
-This is a guide on how to navigate the repository. 
+A two-sided marketplace platform where users can list items for sale and communicate with other users.
 
-## ATTENTION!:
-**Don't push any changes to the main branch**
+## Tech Stack
 
-## Branch naming format
-(feature-frontend/backend) name of the feature here
+**Backend:** Node.js, Express, Firebase Authentication  
+**Frontend:** React, Vite, JavaScript
 
-Example:
-(feature-frontend)navigation bar
+## Setup Instructions
 
-## How are we going to do the work?
+### Prerequisites
+- Node.js (v14 or higher)
+- Firebase project credentials
 
-Step 1:
-- For the clean React files create branch with the (main) branch as the reference. This will only be done once for the first instance of creating the feature.
-- But incase a clean file is needed, get it from the main branch.
+### Backend Setup
 
-Step 2:
-- For new features, always create a new branch with the latest feature used as the reference branch. **Refer to the branch naming guide**
+1. Navigate to the backend folder:
+   ```bash
+   cd backend
+   ```
 
-Example:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Dev 1: Created the navbar feature  
-branch name (feature-frontend)navbar  
-upon completion dev 1 should push the branch and create a pull request.  
+3. Create a `.env` file with Firebase credentials:
+   ```
+   FIREBASE_API_KEY=your_api_key
+   FIREBASE_AUTH_DOMAIN=your_auth_domain
+   FIREBASE_PROJECT_ID=your_project_id
+   FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   FIREBASE_APP_ID=your_app_id
+   ```
 
-Dev 2: Is tasked to create the home page with navbar integration  
-so dev 2 will create a branch using the (feature-frontend)navbar as the branch reference  
-dev 2 will then proceed to code in the branch  
-then upon completion will push the branch and create a pull request too.
+4. Start the server:
+   ```bash
+   npm start
+   ```
+   Server runs on `http://localhost:5000`
 
-Step 3: Document changes well and add well written notes in the code.
-- When pushing a new feature / code edit make sure to document your parts well.
-- Github / Github desktop has a Summary and Description form for that.
+### Frontend Setup
 
-# Additional Notes
-- Avoid spaghetti codes, make sure codes are readable and understandable by peers.
-- Create notes for the codes that needs notes.
-- Keep the code consistency. 
+1. Navigate to the frontend folder:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file with the API endpoint:
+   ```
+   VITE_API_URL=http://localhost:5000
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   App runs on `http://localhost:5173`
+
+## Features
+
+- User authentication (login/register)
+- Create and browse product listings
+- View product details
+- Messaging between users
+- User profile management
+- Admin panel
+
+## Important Details
+
+- Authentication uses Firebase
+- API backend handles all marketplace logic
+- CORS is configured for local development
+- Real-time messaging support
+- Products support detailed descriptions and listings management

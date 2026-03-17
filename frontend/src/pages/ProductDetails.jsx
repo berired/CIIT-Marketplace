@@ -1,11 +1,67 @@
-import { Link, useParams } from 'react-router-dom'
-import products from '../data/products'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { formatCondition, getImageUrl } from '../utils/formatters'
+import listingService from '../services/listingService'
+import messageService from '../services/messageService'
 
 function ProductDetails() {
   const { id } = useParams()
-  const product = products.find((item) => item.id === Number(id))
+  const navigate = useNavigate()
+  const [product, setProduct] = useState(null)
+  const [relatedProducts, setRelatedProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
-  if (!product) {
+  useEffect(() => {
+    fetchProduct()
+  }, [id])
+
+  const fetchProduct = async () => {
+    try {
+      setLoading(true)
+      const response = await listingService.getListingById(id)
+      setProduct(response.listing)
+      
+      // Fetch related products
+      if (response.listing?.category) {
+        const allListings = await listingService.getAllListings(response.listing.category)
+        const related = allListings.listings
+          .filter((item) => item.id !== id)
+          .slice(0, 3)
+        setRelatedProducts(related)
+      }
+    } catch (err) {
+      console.error('Error fetching product:', err)
+      setError('Product not found')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleMessageSeller = async () => {
+    const userData = JSON.parse(localStorage.getItem('user'))
+    if (!userData?.uid) {
+      navigate('/login')
+      return
+    }
+    
+    try {
+      await messageService.sendMessage(product.sellerId, `Hi, I'm interested in your ${product.title}`, product.id)
+      navigate('/messages')
+    } catch (err) {
+      console.error('Error sending message:', err)
+    }
+  }
+
+  if (loading) {
+    return (
+      <section className="product-details-page">
+        <p>Loading...</p>
+      </section>
+    )
+  }
+
+  if (error || !product) {
     return (
       <section className="product-details-page">
         <div className="product-breadcrumb">
@@ -16,17 +72,13 @@ function ProductDetails() {
           <div className="product-details-info">
             <h1>Product not found</h1>
             <p className="auth-subtext">
-              The item you are trying to view does not exist.
+              {error || 'The item you are trying to view does not exist.'}
             </p>
           </div>
         </div>
       </section>
     )
   }
-
-  const relatedProducts = products
-    .filter((item) => item.id !== product.id)
-    .slice(0, 3)
 
   return (
     <section className="product-details-page">
@@ -37,21 +89,21 @@ function ProductDetails() {
       <div className="product-details-card">
         <div className="product-details-image-wrap">
           <img
-            src={product.image}
-            alt={product.name}
+            src={getImageUrl(product.image, product.title)}
+            alt={product.title}
             className="product-details-image"
           />
         </div>
 
         <div className="product-details-info">
           <span className="product-details-category">{product.category}</span>
-          <h1>{product.name}</h1>
-          <p className="product-details-price">{product.price}</p>
+          <h1>{product.title}</h1>
+          <p className="product-details-price">₱{product.price}</p>
 
           <div className="product-meta-grid">
             <div className="meta-box">
               <span className="meta-label">Condition</span>
-              <span className="meta-value">{product.condition}</span>
+              <span className="meta-value">{formatCondition(product.condition)}</span>
             </div>
 
             <div className="meta-box">
@@ -61,7 +113,7 @@ function ProductDetails() {
 
             <div className="meta-box">
               <span className="meta-label">Posted</span>
-              <span className="meta-value">{product.datePosted}</span>
+              <span className="meta-value">{new Date(product.datePosted).toLocaleDateString()}</span>
             </div>
 
             <div className="meta-box">
@@ -76,7 +128,7 @@ function ProductDetails() {
           </div>
 
           <div className="product-details-actions">
-            <button className="primary-btn" type="button">
+            <button className="primary-btn" type="button" onClick={handleMessageSeller}>
               Message Seller
             </button>
             <button className="secondary-btn" type="button">
@@ -96,9 +148,9 @@ function ProductDetails() {
           {relatedProducts.map((item) => (
             <div className="product-card" key={item.id}>
               <img
-                src={item.image}
+                src={getImageUrl(item.image, item.title)}
                 className="product-image"
-                alt={item.name}
+                alt={item.title}
               />
               <div className="product-info">
                 <h3>{item.name}</h3>

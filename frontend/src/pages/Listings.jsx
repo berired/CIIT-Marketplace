@@ -1,17 +1,63 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import products from '../data/products'
+import { useState, useEffect } from 'react'
+import { formatCondition, getImageUrl } from '../utils/formatters'
+import listingService from '../services/listingService'
 
 function Listings() {
   const [showFilters, setShowFilters] = useState(false)
+  const [listings, setListings] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [sortBy, setSortBy] = useState('newest')
+  const [minPrice, setMinPrice] = useState('')
+  const [maxPrice, setMaxPrice] = useState('')
 
-  const filters = [
-    'All',
-    'Fashion',
-    'Gadgets',
-    'School Supplies',
-    'Accessories',
-  ]
+  const categoryMap = {
+    'All': null,
+    'Electronics': 'electronics',
+    'Clothing': 'clothing',
+    'Books': 'books',
+    'Furniture': 'furniture',
+    'Sports': 'sports',
+    'Toys': 'toys',
+    'Household': 'household',
+    'Other': 'other'
+  }
+
+  const filters = Object.keys(categoryMap)
+
+  useEffect(() => {
+    fetchListings()
+  }, [selectedCategory, sortBy])
+
+  const fetchListings = async () => {
+    try {
+      setLoading(true)
+      const category = categoryMap[selectedCategory]
+      const sortValue = sortBy === 'newest' ? 'newest' : 
+                        sortBy === 'lowest' ? 'lowest-price' :
+                        sortBy === 'highest' ? 'highest-price' : 'a-z'
+      
+      const response = await listingService.getAllListings(
+        category,
+        minPrice || null,
+        maxPrice || null,
+        sortValue
+      )
+      setListings(response.listings || [])
+      setError('')
+    } catch (err) {
+      console.error('Error fetching listings:', err)
+      setError('Failed to load listings')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleApplyFilters = () => {
+    fetchListings()
+  }
 
   return (
     <section className="listings-page">
@@ -37,11 +83,11 @@ function Listings() {
 
           <div className="listings-sort">
             <label htmlFor="sort">Sort by</label>
-            <select id="sort">
-              <option>Newest</option>
-              <option>Lowest Price</option>
-              <option>Highest Price</option>
-              <option>A-Z</option>
+            <select id="sort" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value="newest">Newest</option>
+              <option value="lowest">Lowest Price</option>
+              <option value="highest">Highest Price</option>
+              <option value="a-z">A-Z</option>
             </select>
           </div>
         </div>
@@ -51,8 +97,9 @@ function Listings() {
         {filters.map((filter, index) => (
           <button
             key={filter}
-            className={index === 0 ? 'chip active-chip' : 'chip'}
+            className={selectedCategory === filter ? 'chip active-chip' : 'chip'}
             type="button"
+            onClick={() => setSelectedCategory(filter)}
           >
             {filter}
           </button>
@@ -65,8 +112,18 @@ function Listings() {
             <div className="filter-card">
               <h3>Price Range</h3>
               <div className="price-inputs">
-                <input type="number" placeholder="Min" />
-                <input type="number" placeholder="Max" />
+                <input 
+                  type="number" 
+                  placeholder="Min" 
+                  value={minPrice}
+                  onChange={(e) => setMinPrice(e.target.value)}
+                />
+                <input 
+                  type="number" 
+                  placeholder="Max" 
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                />
               </div>
             </div>
 
@@ -90,7 +147,7 @@ function Listings() {
               </label>
             </div>
 
-            <button className="apply-filter-btn" type="button">
+            <button className="apply-filter-btn" type="button" onClick={handleApplyFilters}>
               Apply Filters
             </button>
           </div>
@@ -98,30 +155,38 @@ function Listings() {
       )}
 
       <div className="listings-summary">
-        <p>Showing {products.length} listings</p>
+        <p>Showing {listings.length} listings</p>
       </div>
 
       <div className="listings-grid">
-        {products.map((product) => (
-          <div className="product-card" key={product.id}>
-            <img
-              src={product.image}
-              className="product-image"
-              alt={product.name}
-            />
+        {loading ? (
+          <p>Loading listings...</p>
+        ) : error ? (
+          <p style={{ color: 'red' }}>{error}</p>
+        ) : listings.length > 0 ? (
+          listings.map((product) => (
+            <div className="product-card" key={product.id}>
+              <img
+                src={getImageUrl(product.image, product.title)}
+                className="product-image"
+                alt={product.title}
+              />
 
-            <div className="product-info">
-              <h3>{product.name}</h3>
-              <p className="price">{product.price}</p>
-              <p className="condition">{product.condition}</p>
-              <p className="seller">Seller: {product.seller}</p>
+              <div className="product-info">
+                <h3>{product.title}</h3>
+                <p className="price">₱{product.price}</p>
+                <p className="condition">{formatCondition(product.condition)}</p>
+                <p className="seller">Seller: {product.seller}</p>
 
-              <Link to={`/product/${product.id}`} className="view-btn-link">
-                View Details
-              </Link>
+                <Link to={`/product/${product.id}`} className="view-btn-link">
+                  View Details
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No listings found</p>
+        )}
       </div>
     </section>
   )
