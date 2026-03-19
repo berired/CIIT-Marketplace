@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { formatCondition, getImageUrl } from '../utils/formatters'
 import listingService from '../services/listingService'
+import FilterChips from '../components/Filter-chips/FilterChips'
 
 function Listings() {
   const [showFilters, setShowFilters] = useState(false)
@@ -93,18 +94,11 @@ function Listings() {
         </div>
       </div>
 
-      <div className="filter-chips listings-chips">
-        {filters.map((filter, index) => (
-          <button
-            key={filter}
-            className={selectedCategory === filter ? 'chip active-chip' : 'chip'}
-            type="button"
-            onClick={() => setSelectedCategory(filter)}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
+      <FilterChips 
+        SelectedFilter={selectedCategory}
+        filters={filters}
+        onClick={setSelectedCategory}
+      />
 
       {showFilters && (
         <div className="filters-dropdown">

@@ -57,7 +57,7 @@ function Home() {
           SelectedFilter={selectedFilter}
           filters={filters}
           onClick={setSelectedFilter}
-        ></FilterChips>
+        />
         {/* <div className="filter-chips">
           {filters.map((filter, index) => (
             <button
