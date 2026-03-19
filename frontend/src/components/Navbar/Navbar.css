@@ -58,7 +58,8 @@
 
 /* 2. HAMBURGER UI ELEMENTS (Hidden on Desktop) */
 .menu-toggle {
-  display: none;
+  position: none;
+  display: flex;
   flex-direction: column;
   gap: 5px;
   background: none;
@@ -66,6 +67,11 @@
   cursor: pointer;
   padding: 5px;
   z-index: 1001;
+}
+
+.sticky{
+  position: fixed;
+  right: 12px;
 }
 
 .bar {
@@ -102,7 +108,7 @@
   }
 
   .nav-menu.active {
-    display: flex; /* Show only when active */
+    display: flex; /* Show only when active */ 
     right: 0;
   }
 } 

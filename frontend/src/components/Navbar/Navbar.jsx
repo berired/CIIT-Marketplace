@@ -21,7 +21,7 @@ return (
       <div className="logo">CIIT Marketplace</div>
 
       {/* 1. The Hamburger Button (Mobile Only) */}
-      <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+      <button className={`menu-toggle ${isMenuOpen ?'sticky':''}`} onClick={toggleMenu} aria-label="Toggle menu">
         <span className={`bar ${isMenuOpen ? 'open' : ''}`}></span>
         <span className={`bar ${isMenuOpen ? 'open' : ''}`}></span>
         <span className={`bar ${isMenuOpen ? 'open' : ''}`}></span>
