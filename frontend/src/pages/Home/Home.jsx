@@ -5,6 +5,7 @@ import listingService from '../../services/listingService'
 import FilterChips from '../../components/Filter-chips/FilterChips'
 import './Home.css'
 import SectionHeader from '../../components/SectionHeader/SectionHeader'
+import Search from '../../components/search/Search'
 const categoryMap = {
   'All': null,
   'Electronics': 'electronics',
@@ -47,31 +48,16 @@ function Home() {
     : featuredProducts.filter(p => p.category === categoryMap[selectedFilter])
 
   return (
-    <>
+    <div className='hero-page'>
       <div className="search-container">
-        <div className="search-bar">
-          <input type="text" placeholder="Search items..." />
-          <button type="button">🔍</button>
-        </div>
-
-        <FilterChips
-          SelectedFilter={selectedFilter}
-          filters={filters}
-          onClick={setSelectedFilter}
-        />
-        {/* <div className="filter-chips">
-          {filters.map((filter, index) => (
-            <button
-              key={filter}
-              className={selectedFilter === filter ? 'chip active-chip' : 'chip'}
-              type="button"
-              onClick={() => setSelectedFilter(filter)}
-            >
-              {filter}
-            </button>
-          ))}
-        </div> */}
+        <Search />
       </div>
+
+      <FilterChips
+        SelectedFilter={selectedFilter}
+        filters={filters}
+        onClick={setSelectedFilter}
+      />
 
       <section className="hero">
         <div className="hero-text">
@@ -137,7 +123,7 @@ function Home() {
           )}
         </div>
       </section>
-    </>
+    </div>
   )
 }
 

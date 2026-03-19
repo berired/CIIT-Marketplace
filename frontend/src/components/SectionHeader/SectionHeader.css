@@ -5,3 +5,10 @@
 .section-header h2 {
   font-size: 2rem;
 }
+
+@media (max-width: 850px){
+  .section-header{
+    display: flex;
+    flex-direction: column;
+  }
+}
