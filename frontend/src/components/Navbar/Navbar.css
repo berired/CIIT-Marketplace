@@ -1,5 +1,4 @@
-/* NAVBAR */
-
+/* 1. BASE DESKTOP STYLES (Always active) */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -7,6 +6,7 @@
   padding: 18px 60px;
   background: white;
   border-bottom: 1px solid var(--border);
+  position: relative; /* Important for layering */
 }
 
 .logo {
@@ -19,19 +19,19 @@
 .nav-links {
   display: flex;
   gap: 24px;
+  margin: 0 auto;
 }
 
 .nav-links a {
   text-decoration: none;
   color: var(--text);
   font-weight: 500;
+  transition: color 0.2s;
 }
 
 .nav-links a:hover {
   color: var(--ciit-accent);
 }
-
-/* NAV BUTTONS */
 
 .nav-actions {
   display: flex;
@@ -43,6 +43,7 @@
   padding: 10px 16px;
   border-radius: 10px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .primary-nav-btn {
@@ -53,4 +54,111 @@
 .secondary-nav-btn {
   border: 2px solid var(--ciit-dark);
   color: var(--ciit-dark);
+}
+
+/* 2. HAMBURGER UI ELEMENTS (Hidden on Desktop) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1001;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--ciit-dark);
+  transition: 0.3s;
+}
+
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* Space between the links group and the buttons group */
+  flex: 1;
+  margin-left: 40px; /* Space after the logo */
+}
+
+@media (max-width: 850px) {
+  .nav-menu {
+    /* These overrides ensure the drawer behavior works on mobile */
+    display: none; /* Default state for mobile is hidden */
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    justify-content: flex-start; /* Reset from desktop 'space-between' */
+    margin-left: 0;
+    padding: 80px 30px;
+    transition: 0.4s ease-in-out;
+  }
+
+  .nav-menu.active {
+    display: flex; /* Show only when active */
+    right: 0;
+  }
+} 
+
+/* 3. THE MOBILE LOGIC (Kicks in at 850px) */
+@media (max-width: 850px) {
+  .navbar {
+    padding: 15px 20px; /* Smaller padding for mobile */
+  }
+
+  .menu-toggle {
+    display: flex; /* Show the button */
+  }
+
+  /* Hamburger to 'X' animation */
+  .bar.open:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .bar.open:nth-child(2) { opacity: 0; }
+  .bar.open:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* THE SLIDE-OUT DRAWER */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Hidden off-screen */
+    width: 280px;  /* Fixed width is better for side menus */
+    height: 100vh;
+    background: white;
+    box-shadow: -10px 0 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 80px 30px; 
+    transition: 0.4s ease-in-out;
+    z-index: 1000;
+  }
+
+  .nav-menu.active {
+    right: 0; /* Slide into view */
+  }
+
+  /* Stack links vertically inside the drawer */
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+
+  /* Stack buttons vertically inside the drawer */
+  .nav-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .nav-btn {
+    width: 100%; /* Buttons take full width of drawer */
+    text-align: center;
+  }
 }
