@@ -1,8 +1,8 @@
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { formatCondition, getImageUrl } from '../utils/formatters'
-import listingService from '../services/listingService'
-import messageService from '../services/messageService'
+import { formatCondition, getImageUrl } from '../../utils/formatters'
+import listingService from '../../services/listingService'
+import messageService from '../../services/messageService'
 
 function ProductDetails() {
   const { id } = useParams()

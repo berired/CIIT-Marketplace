@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import Navbar from './components/navbar/Navbar'
-import Footer from './components/Footer'
+import Footer from './components/Footer/Footer'
 import Home from './pages/Home/Home';
 import Listings from './pages/Listings/Listings'
 import CreateListing from './pages/CreateListing'
-import ProductDetails from './pages/ProductDetails'
+import ProductDetails from './pages/ProductDetails.css/ProductDetails'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Messages from './pages/Messages/Messages'
