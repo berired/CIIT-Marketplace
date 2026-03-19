@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import messageService from '../services/messageService';
+import messageService from '../../services/messageService';
 import './Messages.css';
 
 function Messages() {

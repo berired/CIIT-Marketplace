@@ -8,9 +8,9 @@ import CreateListing from './pages/CreateListing'
 import ProductDetails from './pages/ProductDetails'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Messages from './pages/Messages'
-import Profile from './pages/Profile'
-import Admin from './pages/Admin'
+import Messages from './pages/Messages/Messages'
+import Profile from './pages/Profile/Profile'
+import Admin from './pages/Admin/Admin'
 import './App.css'
 
 function App() {

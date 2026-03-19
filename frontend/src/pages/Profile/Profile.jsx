@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import userService from '../services/userService';
-import listingService from '../services/listingService';
-import { formatCondition, formatCategory } from '../utils/formatters';
+import userService from '../../services/userService';
+import listingService from '../../services/listingService';
+import { formatCondition, formatCategory } from '../../utils/formatters';
 import './Profile.css';
+import SectionHeader from '../../components/SectionHeader/SectionHeader';
 
 /**
  * Convert File to Data URL (Blob)
@@ -350,9 +351,9 @@ function Profile() {
       )}
 
       {/* Listings Section */}
-      <div className="section-header">
+      <SectionHeader>
         <h2>My Postings ({myListings.length})</h2>
-      </div>
+      </SectionHeader>
 
       <div className="listings-grid">
         {loading ? (

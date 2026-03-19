@@ -4,6 +4,7 @@ import { formatCondition, getImageUrl } from '../../utils/formatters'
 import listingService from '../../services/listingService'
 import FilterChips from '../../components/Filter-chips/FilterChips'
 import './Home.css'
+import SectionHeader from '../../components/SectionHeader/SectionHeader'
 const categoryMap = {
   'All': null,
   'Electronics': 'electronics',
@@ -100,10 +101,10 @@ function Home() {
       </section>
 
       <section className="products-section">
-        <div className="section-header">
+        <SectionHeader>
           <h2>Latest Listings</h2>
           <p>Discover affordable finds from fellow students.</p>
-        </div>
+        </SectionHeader>
 
         <div className="product-grid">
           {loading ? (
