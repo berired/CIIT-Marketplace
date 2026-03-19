@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { formatCondition, getImageUrl } from '../utils/formatters'
-import listingService from '../services/listingService'
-import FilterChips from '../components/Filter-chips/FilterChips'
+import { formatCondition, getImageUrl } from '../../utils/formatters'
+import listingService from '../../services/listingService'
+import FilterChips from '../../components/Filter-chips/FilterChips'
+import './Listings.css'
 
 function Listings() {
   const [showFilters, setShowFilters] = useState(false)
