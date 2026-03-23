@@ -178,6 +178,123 @@
   align-items: center;
 }
 
+/* AUTH PAGES RESPONSIVE */
+@media (max-width: 768px) {
+  .auth-page {
+    min-height: calc(100vh - 80px);
+    padding: 20px 16px;
+  }
+
+  .auth-card {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .auth-left {
+    padding: 30px 24px;
+    order: 1;
+  }
+
+  .auth-left h1 {
+    font-size: 1.75rem;
+  }
+
+  .auth-badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+
+  .auth-subtext {
+    font-size: 0.95rem;
+  }
+
+  .form-group input {
+    padding: 11px 12px;
+    font-size: 1rem;
+  }
+
+  .auth-submit-btn {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  .auth-right {
+    padding: 30px 24px;
+    order: 0;
+    min-height: auto;
+  }
+
+  .auth-feature-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .auth-feature-card p {
+    font-size: 0.95rem;
+  }
+
+  .auth-feature-list {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 16px 12px;
+  }
+
+  .auth-card {
+    border-radius: 16px;
+  }
+
+  .auth-left {
+    padding: 24px 20px;
+  }
+
+  .auth-left h1 {
+    font-size: 1.5rem;
+  }
+
+  .auth-badge {
+    font-size: 0.75rem;
+  }
+
+  .auth-subtext {
+    font-size: 0.875rem;
+    margin-bottom: 20px;
+  }
+
+  .auth-form {
+    gap: 14px;
+  }
+
+  .form-group input {
+    padding: 10px 12px;
+  }
+
+  .auth-submit-btn {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .auth-footer-text {
+    font-size: 0.9rem;
+    margin-top: 14px;
+  }
+
+  .auth-right {
+    padding: 24px 20px;
+  }
+
+  .auth-feature-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .auth-feature-list li {
+    margin-bottom: 8px;
+  }
+}
+
 
 /* PRODUCT DETAILS PAGE */
 
