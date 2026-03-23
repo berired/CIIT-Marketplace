@@ -196,10 +196,18 @@
   }
 
   .listings-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
   .price-inputs {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .listings-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }

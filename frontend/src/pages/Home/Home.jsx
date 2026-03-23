@@ -92,7 +92,7 @@ function Home() {
           <p>Discover affordable finds from fellow students.</p>
         </SectionHeader>
 
-        <div className="product-grid">
+        <div className="listings-grid">
           {loading ? (
             <p>Loading listings...</p>
           ) : error ? (
