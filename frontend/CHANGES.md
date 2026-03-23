@@ -13,5 +13,12 @@
   - **added humberg[sic] to navbar**: mali pa spelling ng hamburger
 
 ### TODO ig:
-  - [ ] login pages responsivenesss
-  - [ ] Listing when products are actually loaded
+  - []x login pages responsivenesss
+  - [x] Listing when products are actually loaded
+
+## [2026-03-23]
+### GIT COMMITS in order:
+  - **made home page responsive**: change css
+  - **fixed toggle being dragged when scrolled up**: fixed hamburger appearing in desktop
+  - **made sign up and login responsive**: title
+  - **Changed home jsx listings sections**: refactored home to use post listings css
