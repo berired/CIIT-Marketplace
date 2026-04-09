@@ -1,0 +1,149 @@
+/* HERO */
+
+.hero-page{
+  padding: 30px 60px 50px;
+}
+
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  padding: 30px 60px;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: 2.8rem;
+  margin-bottom: 14px;
+}
+
+.hero-text p {
+  color: #6b7280;
+  margin-bottom: 22px;
+  max-width: 520px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.primary-btn {
+  background: var(--ciit-dark);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  border: 2px solid var(--ciit-dark);
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: white;
+  color: var(--ciit-dark);
+}
+
+/* HERO CARD */
+
+.hero-card {
+  background: linear-gradient(135deg, var(--ciit-dark), var(--ciit-accent));
+  color: white;
+  padding: 30px;
+  border-radius: 22px;
+  box-shadow: 0 16px 32px rgba(10, 63, 79, 0.15);
+}
+
+.featured-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.featured-tag {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+/* SEARCH */
+/* 
+.search-container {
+  padding: 25px 60px 0;
+} */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  width: 340px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 10px 14px;
+  flex: 1;
+}
+
+.search-bar button {
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+  .hero-page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .hero {
+    /* Switch from 2-columns to a single column stack */
+    grid-template-columns: 1fr; 
+    gap: 30px;
+    padding: 30px 20px; /* Reduce the huge 60px desktop padding */
+    text-align: center; /* Optional: Center text for a better mobile vibe */
+  }
+
+  .hero-text h1 {
+    font-size: 2rem; /* Shrink giant text so it doesn't wrap awkwardly */
+  }
+
+  .hero-text p {
+    margin: 0 auto 22px; /* Center the paragraph if using text-align center */
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    justify-content: center; /* Keep buttons centered */
+    flex-direction: column; /* Stack buttons if they are too wide */
+  }
+
+  /* 2. SEARCH BAR FLUIDITY */
+  .search-container {
+    padding: 0; /* Reduce side padding */
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-bar {
+    /* CRITICAL: width: 100% ensures it fits small screens, 
+       max-width: 340px keeps it from getting too big on tablets */
+    width: 100%; 
+    max-width: 340px; 
+  }
+
+  /* 3. HERO CARD ADJUSTMENTS */
+  .hero-card {
+    padding: 20px;
+    border-radius: 18px;
+  }
+}

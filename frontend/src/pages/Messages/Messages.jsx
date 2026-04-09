@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import messageService from '../services/messageService';
+import messageService from '../../services/messageService';
 import './Messages.css';
 
 function Messages() {
@@ -65,7 +65,7 @@ function Messages() {
   const currentContact = conversations.find(c => c.id === activeChatId);
 
   return (
-    <section className="messages-container">
+    <section className={`messages-container ${activeChatId ? 'has-active-chat' : ''}`}>
       <aside className="inbox-sidebar">
         <div className="inbox-header">
           <h2>Messages</h2>
@@ -103,6 +103,7 @@ function Messages() {
 
       <main className="chat-window">
         <header className="chat-window-header">
+          <button className="back-btn" onClick={() => setActiveChatId(null)}>← Back</button>
           <div className="chat-header-info">
             <h3>{currentContact?.participantNames?.[1] || 'Select a conversation'}</h3>
             <span className="status">online</span>

@@ -1,0 +1,9 @@
+/* FOOTER */
+
+.footer {
+  margin-top: 40px;
+  background: var(--ciit-dark);
+  color: white;
+  text-align: center;
+  padding: 24px;
+}

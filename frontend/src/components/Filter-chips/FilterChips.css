@@ -1,0 +1,37 @@
+.filter-chips {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: white;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: white;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  background: var(--ciit-accent);
+  color: white;
+  border-color: var(--ciit-accent);
+}
+
+.active-chip {
+  background: var(--ciit-dark);
+  color: white;
+  border-color: var(--ciit-dark);
+}
